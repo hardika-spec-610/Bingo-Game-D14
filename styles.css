@@ -26,3 +26,9 @@ h1 {
   line-height: 50px;
   display: inline-block;
 }
+.selected {
+  background-color: brown;
+}
+.board-container {
+  margin-top: 20px;
+}
