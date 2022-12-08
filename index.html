@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Bingo</title>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>Hardika's Bingo!!</h1>
+        <input
+          title="numberInput"
+          type="number"
+          id="numberInput"
+          class="inputNumber"
+        />
+        <button type="button" class="user-boad-btn">User Board</button>
+        <button
+          type="button"
+          id="random-number"
+          class="random-num-btn"
+          onclick="createRandomNumber()"
+        >
+          Random Number
+        </button>
+      </div>
+      <div id="num-container">
+        <!-- Add the number here, with JS -->
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

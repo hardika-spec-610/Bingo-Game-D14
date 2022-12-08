@@ -1,0 +1,28 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(16, 19, 53);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+.container {
+  max-width: 1000px;
+  margin-inline: auto;
+}
+h1 {
+  text-align: center;
+  color: blueviolet;
+}
+#num-container {
+  margin-top: 20px;
+}
+.number {
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgb(140, 60, 140);
+  text-align: center;
+  font-size: 22px;
+  line-height: 50px;
+  display: inline-block;
+}
