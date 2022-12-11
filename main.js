@@ -1,7 +1,7 @@
-let n;
 let numberNode;
 let numberArray;
 let numberConatiner = [];
+let repeatedNumber = [];
 function generateColor() {
   const hexArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
   let code = "";
@@ -10,35 +10,65 @@ function generateColor() {
   }
   return `#${code}`;
 }
+// create an arr in range[1,...76]
+const fillArray = function () {
+  let arr = [];
+  for (let i = 0; i < 76; i++) {
+    arr.push(i + 1);
+  }
+  return arr;
+};
+// generate random index in the range of the arr.length
+// get element in the arr under the index
+// remove the element from the arr
 
-function createRandomNumber() {
-  n = Math.floor(Math.random() * 75) + 1;
-  //   console.log(n);
-  let divNodes = numberConatiner[n - 1];
-  //   console.log(numberConatiner);
-  //   console.log(divNodes);
+const getRandomArray = function (range) {
+  const randIndex = Math.floor(Math.random() * range.length);
+  const random = range.splice(randIndex, 1)[0];
+  // console.log("random", random);
+  return random;
+};
+
+function createRandomNumber(range) {
+  const random = getRandomArray(range);
+  let divNodes = numberConatiner[random - 1];
+  // console.log(numberConatiner);
+  // console.log(divNodes);
   divNodes.classList.add("selected");
   divNodes.style.backgroundColor = generateColor();
+
+  const userBoardNumber = document.querySelectorAll(
+    ".user-board-margin .number"
+  );
+  userBoardNumber.forEach((cell) => {
+    if (parseInt(cell.innerText) === random) {
+      cell.classList.add("selected");
+      cell.style.backgroundColor = generateColor();
+    }
+  });
 }
-function createNewBoard() {
+
+function resetRandomNumber() {
+  getRandomArray(range);
+  return;
+}
+
+function generateUserBoard() {
   let inputValue = document.getElementById("numberInput").value;
-  if (inputValue === "") {
-    alert("Text cannot be empty!");
-    return;
+  let userBoard = document.getElementById("user-board");
+  if (parseInt(inputValue) > 0) {
+    for (let i = 0; i < parseInt(inputValue); i++) {
+      const range = fillArray();
+      let board = document.createElement("div");
+      // console.log(board);
+      board.classList.add("user-board-margin");
+      for (let i = 0; i < 24; i++) {
+        const random = getRandomArray(range);
+        board.innerHTML += `<div class='number'>${random}</div>`;
+      }
+      userBoard.appendChild(board);
+    }
   }
-  let numberConvert = parseFloat(inputValue);
-  //   console.log(numberConvert);
-  // if(numberConvert === 'Number'){
-
-  // }
-  for (let num of n) {
-    let newBoard = document.createElement("div");
-    newBoard.classList.add("number");
-    newBoard.innerText = num;
-    console.log("number,", newBoard.innerText);
-  }
-
-  //   newBoard.classList.add("board-container");
 }
 
 function onLoadActions() {
@@ -52,6 +82,19 @@ function onLoadActions() {
       .appendChild(numberNode);
     numberConatiner.push(numberArray);
   }
+  const randBtn = document.getElementById("random-number");
+  const range = fillArray();
+  randBtn.addEventListener("click", function () {
+    createRandomNumber(range);
+  });
+  const userBoardBtn = document.getElementById("userBoardBtn");
+  // userBoardBtn.onclick = generateUserBoard;
+  userBoardBtn.addEventListener("click", function () {
+    generateUserBoard();
+  });
+  // userBoardBtn.addEventListener("reset", function () {
+  //   resetRandomNumber();
+  // });
 }
 
 window.onload = onLoadActions;
